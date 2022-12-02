@@ -1,0 +1,122 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Courses api",
+        "contact": {
+            "email": "admin@example.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:5000/api",
+            "description": "Courses Api Task9"
+        }
+    ],
+    "paths": {
+        "/v1/courses/": {
+            "get": {
+                "tags": [
+                    "Courses"
+                ],
+                "summary": "Students in Course",
+                "operationId": "CourseIndex",
+                "parameters": [
+                    {
+                        "name": "coursId",
+                        "in": "query",
+                        "description": "courses id: 1-10",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "default": "1"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Student in Сours"
+                    }
+                }
+            }
+        },
+        "/v1/groups/": {
+            "get": {
+                "tags": [
+                    "Courses"
+                ],
+                "summary": "Students in groups",
+                "operationId": "GroupsIndex",
+                "parameters": [
+                    {
+                        "name": "amountStudents",
+                        "in": "query",
+                        "description": "The number of students is less than or equal to a given number: amountStudents: 10...30",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "default": "30"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Student in groups description"
+                    }
+                }
+            }
+        },
+        "/v1/students/": {
+            "get": {
+                "tags": [
+                    "Courses"
+                ],
+                "summary": "Students",
+                "operationId": "StudentIndex",
+                "responses": {
+                    "200": {
+                        "description": "Students"
+                    }
+                }
+            }
+        },
+        "/v1/students/{student}": {
+            "get": {
+                "tags": [
+                    "Courses"
+                ],
+                "summary": "Students",
+                "operationId": "StudentShow",
+                "parameters": [
+                    {
+                        "name": "student",
+                        "in": "path",
+                        "description": "id student 1-200",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Students"
+                    },
+                    "404": {
+                        "description": "no such student"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Courses",
+            "description": "Api Courses"
+        }
+    ]
+}

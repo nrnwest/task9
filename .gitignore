@@ -1,0 +1,7 @@
+/node_modules
+/storage/*.key
+/vendor/
+.phpunit.result.cache
+/.idea
+#.env
+#/public/coverage/
