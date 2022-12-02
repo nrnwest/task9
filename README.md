@@ -44,7 +44,7 @@ Docker must be installed.
 ### Deployment
 
 ```bash
-git clone https://github.com/nrnwest/symfony_gramm.git
+git clone https://github.com/nrnwest/task9.git
 ```
 
 ```bash
