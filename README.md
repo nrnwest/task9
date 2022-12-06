@@ -1,4 +1,5 @@
 ### Training courses
+
 Create an application that inserts/updates/deletes data in the database using eloquent and laravel framework.
 Use PostgreSQL DB.
 
@@ -37,7 +38,6 @@ Add REST-api and swagger.
 
 Write tests using Phpunit. Add code coverage report.
 
-
 The project needs to be pinked on a Linux or Windows (wsl2 Unbuntu 20.*) platform.
 Docker must be installed.
 
@@ -50,21 +50,31 @@ git clone https://github.com/nrnwest/task9.git
 ```bash
 make dep
 ````
-pause 60 seconds for weak computers.
+
+**If an error occurs, run the following commands, errors occur due to weak computer:**
+
+1. make build
+2. make up
+3. make composer
+4. make db_add
 
 ### Website
-[Training courses](http://localhost:5000)
+
+<http://localhost:5000>
 
 ### Swagger
-[Swagger](http://localhost:5000/api/documentation)
+
+<http://localhost:5000/api/documentation>
 
 ### Coverage
-[Coverage](http://localhost:5000/coverage/index.html)
 
-### 
+<http://localhost:5000/coverage/index.html)>
+
+###  
+
 user admin@admin.com
 password root
-[pgAdmin](http://localhost:5050/browser/)
+<http://localhost:5050/browser/>
 
 ## Tests
 

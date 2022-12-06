@@ -3,8 +3,13 @@
 ##################
 
 DOCKER_COMPOSE = docker-compose -f ./_docker/docker-compose.yml --env-file ./_docker/.env
-DOCKER_COMPOSE_PHP_FPM_EXEC = ${DOCKER_COMPOSE} exec -u www-data php-fpm
-DOCKER_COMPOSE_TEST = ${DOCKER_COMPOSE} exec -u www-data php-fpm php bin/console
+DOCKER_COMPOSE_EXEC = exec -u www-data php-fpm
+
+PRINT_SEPARATOR = "\n"
+PRINT_WELCOME = Welcome: http://localhost:5000
+PRINT_SWAGGER = Swagger: http://localhost:5000/api/documentation
+PRINT_COVERAGE = Coverage: http://localhost:5000/coverage/index.html
+PRINT_PGADMIN = pgAdmin: http://localhost:5050/browser/
 
 ##################
 # Docker compose
@@ -32,7 +37,7 @@ restart:
 ##################
 
 php:
-	${DOCKER_COMPOSE} exec -u www-data php-fpm bash
+	${DOCKER_COMPOSE} ${DOCKER_COMPOSE_EXEC}  bash
 composer:
 	${DOCKER_COMPOSE} exec -u www-data php-fpm composer install
 
@@ -40,41 +45,42 @@ composer:
 # Test
 ##################
 test:
-	${DOCKER_COMPOSE} exec -u www-data php-fpm php artisan test
+	${DOCKER_COMPOSE} ${DOCKER_COMPOSE_EXEC} php vendor/bin/phpunit
 
 ##################
 # Database
 ##################
 
-migrate:
-	${DOCKER_COMPOSE} exec -u www-data php-fpm php artisan migrate
-seed:
-	${DOCKER_COMPOSE} exec -u www-data php-fpm php artisan db:seed
+db_migrate:
+	${DOCKER_COMPOSE} ${DOCKER_COMPOSE_EXEC} php artisan migrate
+
+db_seed:
+	${DOCKER_COMPOSE} ${DOCKER_COMPOSE_EXEC} php artisan db:seed
+
+db_add:
+	make db_migrate db_seed
 
 #################
 #  Deployment
 #################
 dep:
-	make build pause5 up pause4 composer pause60 migrate seed wprint
+	make build  up  composer pause10 db_add print
 
 #################
 # pause
 # for weak computers.
 #################
 
-pause60:
-	sleep 60
-pause5:
-	sleep 5
-pause4:
-	sleep 4
+pause10:
+	sleep 10
 
 #################
 # Hi
 #################
-wprint:
-	@echo "\n"
-	@echo Welcome: http://localhost:5000 Swager: http://localhost:5000/api/documentation
-	@echo Coverage: http://localhost:5000/coverage/index.html pgAdmin: http://localhost:5050/browser/
-	@echo "\n\n"
-
+print:
+	@echo ${PRINT_SEPARATOR}
+	@echo ${PRINT_WELCOME}
+	@echo ${PRINT_SWAGGER}
+	@echo ${PRINT_COVERAGE}
+	@echo ${PRINT_PGADMIN}
+	@echo ${PRINT_SEPARATOR}
