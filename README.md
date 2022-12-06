@@ -1,7 +1,7 @@
 ### Training courses
 
-Create an application that inserts/updates/deletes data in the database using eloquent and laravel framework.
-Use PostgreSQL DB.
+Create an application that inserts/updates/deletes data in the database using eloquent
+and laravel framework. Use PostgreSQL DB.
 
 Models have to have next field
 
@@ -70,7 +70,7 @@ make dep
 
 <http://localhost:5000/coverage/index.html)>
 
-###  
+###   
 
 user admin@admin.com
 password root
