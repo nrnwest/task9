@@ -75,6 +75,17 @@ pause10:
 	sleep 10
 
 #################
+# deploy laravel
+#################
+deploy_laravel:
+	${DOCKER_COMPOSE} exec -u www-data php-fpm composer install --optimize-autoloader --no-dev
+	${DOCKER_COMPOSE} ${DOCKER_COMPOSE_EXEC} php artisan config:cache
+	#${DOCKER_COMPOSE} ${DOCKER_COMPOSE_EXEC} php artisan route:cache
+	${DOCKER_COMPOSE} ${DOCKER_COMPOSE_EXEC} php artisan view:cache
+	@echo edit file .env APP_DEBUG=false
+
+
+#################
 # Hi
 #################
 print:
