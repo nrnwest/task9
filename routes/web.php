@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 
+Route::get('/test', \App\Http\Controllers\TestController::class)->name('test');
+
 Route::get('/', [IndexController::class, 'index'])->name('index');
 
 Route::get('/groups/', [GroupController::class, 'index'])->name('groups.index');
