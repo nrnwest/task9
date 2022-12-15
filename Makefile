@@ -39,7 +39,7 @@ restart:
 php:
 	${DOCKER_COMPOSE} ${DOCKER_COMPOSE_EXEC}  bash
 composer:
-	${DOCKER_COMPOSE} exec -u www-data php-fpm composer install
+	${DOCKER_COMPOSE} ${DOCKER_COMPOSE_EXEC} composer install
 
 ##################
 # Test
@@ -66,6 +66,20 @@ db_add:
 dep:
 	make build  up  composer pause10 db_add print
 
+deploy_laravel:
+	${DOCKER_COMPOSE} ${DOCKER_COMPOSE_EXEC} composer install --optimize-autoloader --no-dev
+	${DOCKER_COMPOSE} ${DOCKER_COMPOSE_EXEC} php artisan config:cache
+	#${DOCKER_COMPOSE} ${DOCKER_COMPOSE_EXEC} php artisan route:cache
+	${DOCKER_COMPOSE} ${DOCKER_COMPOSE_EXEC} php artisan view:cache
+	@echo edit file .env APP_DEBUG=false
+
+redeploy_laravel:
+	${DOCKER_COMPOSE} ${DOCKER_COMPOSE_EXEC} composer install --optimize-autoloader
+	${DOCKER_COMPOSE} ${DOCKER_COMPOSE_EXEC} php artisan config:clear
+	${DOCKER_COMPOSE} ${DOCKER_COMPOSE_EXEC} php artisan route:clear
+	${DOCKER_COMPOSE} ${DOCKER_COMPOSE_EXEC} php artisan view:clear
+	@echo edit file .env APP_DEBUG=false
+
 #################
 # pause
 # for weak computers.
@@ -73,17 +87,6 @@ dep:
 
 pause10:
 	sleep 10
-
-#################
-# deploy laravel
-#################
-deploy_laravel:
-	${DOCKER_COMPOSE} exec -u www-data php-fpm composer install --optimize-autoloader --no-dev
-	${DOCKER_COMPOSE} ${DOCKER_COMPOSE_EXEC} php artisan config:cache
-	#${DOCKER_COMPOSE} ${DOCKER_COMPOSE_EXEC} php artisan route:cache
-	${DOCKER_COMPOSE} ${DOCKER_COMPOSE_EXEC} php artisan view:cache
-	@echo edit file .env APP_DEBUG=false
-
 
 #################
 # Hi
