@@ -5,7 +5,7 @@ namespace App\Providers;
 use App\Services\TestService;
 use Illuminate\Support\ServiceProvider;
 
-class TestServiceProvider extends ServiceProvider
+class TestServiceProvider1 extends ServiceProvider
 {
     /**
      * Register services.
