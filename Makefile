@@ -45,7 +45,7 @@ composer:
 # Test
 ##################
 test:
-	${DOCKER_COMPOSE} ${DOCKER_COMPOSE_EXEC} php vendor/bin/phpunit
+	${DOCKER_COMPOSE} ${DOCKER_COMPOSE_EXEC} php artisan test
 
 ##################
 # Database
