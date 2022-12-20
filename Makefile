@@ -6,10 +6,10 @@ DOCKER_COMPOSE = docker-compose -f ./_docker/docker-compose.yml --env-file ./_do
 DOCKER_COMPOSE_EXEC = exec -u www-data php-fpm
 
 PRINT_SEPARATOR = "\n"
-PRINT_WELCOME = Welcome: http://localhost:5000
-PRINT_SWAGGER = Swagger: http://localhost:5000/api/documentation
-PRINT_COVERAGE = Coverage: http://localhost:5000/coverage/index.html
-PRINT_PGADMIN = pgAdmin: http://localhost:5050/browser/
+PRINT_WELCOME = Welcome: http://localhost:4000
+PRINT_SWAGGER = Swagger: http://localhost:4000/api/documentation
+PRINT_COVERAGE = Coverage: http://localhost:4000/coverage/index.html
+PRINT_PGADMIN = pgAdmin: http://localhost:4000/browser/
 
 ##################
 # Docker compose
@@ -31,6 +31,9 @@ down:
 	${DOCKER_COMPOSE} down -v --rmi=all --remove-orphans
 restart:
 	make stop start
+
+net:
+	docker network ls
 
 ##################
 # App

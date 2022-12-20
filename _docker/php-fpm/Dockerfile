@@ -17,6 +17,9 @@ COPY ./_docker/php-fpm/default.ini /usr/local/etc/php/conf.d/default.ini
 # Postgres && Mysql
 RUN apk add --no-cache libpq-dev && docker-php-ext-install pdo_pgsql
 
+# install pg_dump
+RUN apk add --no-cache postgresql
+
 # opCache
 RUN docker-php-ext-install opcache
 
